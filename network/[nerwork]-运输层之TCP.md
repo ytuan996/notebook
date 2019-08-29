@@ -130,7 +130,7 @@ TCP的滑动窗口是以字节为单位。
 
 #### 1. TCP的连接建立
 
-![TCPconnection](./image/TCP连接建立.png)
+![TCPconnection](https://github.com/ytuan996/notebook/blob/master/network/image/tcp_connection.png?raw=true)
 
 
 
