@@ -133,8 +133,9 @@ TCP的滑动窗口是以字节为单位。
 ![TCPconnection](https://github.com/ytuan996/notebook/blob/master/network/image/tcp_connection.png?raw=true)
 
 
+#### 2. TCP 的连接释放
 
-
+![TCFreed](https://github.com/ytuan996/notebook/blob/master/network/image/tcp_freed.png?raw=true)
 
 
 
