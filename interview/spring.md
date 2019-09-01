@@ -47,6 +47,7 @@ InvocationHandler | 是一个接口，通过实现该接口定义横切逻辑，
         void sayHello(String name);
     }
     ```
+    
     (2).创建接口的实现类
    
    ```java
