@@ -17,7 +17,7 @@ Spring是Java分层应用一站式的轻量级开源框架，以IOC和AOP为内�
     结构信息，如构造函数，属性，方法等，从而间接控制该Class，这就是Java反射机制。在java.reflect包中，由与反射调用相关的类，这里主要看三个重要的：
     
 类名 | 描述 |
-- | - |
+--|--|
 Constructor | 类的构造函数反射类，其中一个主要方法是 newInstance(Objects...initargs)创建对象类的实例，相当于new.
 Method | 类方法的反射类，invoke(Object obj, Objects...args)调用对象的方法。
 Field | 类的成员变量反射类。
@@ -34,7 +34,7 @@ Field | 类的成员变量反射类。
     1. 动态代理允许开发者在运行期创建接口的代理实例，是AOP绝好的底层技术。主要涉及两个类：
     
 类名 | 作用说明 |
-- | - |
+-- | -- |
 Proxy | 利用 InvocationHandler 动态地创建一个符合某一接口的实例，生成目标类的代理对象
 InvocationHandler | 是一个接口，通过实现该接口定义横切逻辑，并通过反射机制调用目标类的代码，动态地将横切逻辑和业务逻辑编织在一起。
 
