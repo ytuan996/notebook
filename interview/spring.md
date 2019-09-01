@@ -22,7 +22,7 @@ Constructor | 类的构造函数反射类，其中一个主要方法是 newInsta
 Method | 类方法的反射类，invoke(Object obj, Objects...args)调用对象的方法。
 Field | 类的成员变量反射类。
     
-    2. 代码实例
+    2. 类加载器
     
     ```java
     // 改天再写了
@@ -39,4 +39,28 @@ Proxy | 利用 InvocationHandler 动态地创建一个符合某一接口的实�
 InvocationHandler | 是一个接口，通过实现该接口定义横切逻辑，并通过反射机制调用目标类的代码，动态地将横切逻辑和业务逻辑编织在一起。
 
 
-    
+### 3. BeanFactory和ApplicationContext有什么区别？
+
+### 4. 请解释Spring Bean的生命周期？
+
+### 5. 解释Spring支持的几种bean的作用域。
+
+### 6. Spring框架中的单例Beans是线程安全的么？
+
+### 7. Spring如何处理线程并发问题？
+
+### 8. Spring的自动装配：
+
+### 9. Spring 框架中都用到了哪些设计模式？
+
+### 10. Spring事务的实现方式和实现原理：
+
+###### 1. spring事务的种类
+
+###### 2. spring的事务传播行为：
+
+###### 3. Spring中的隔离级别：
+
+### 11.
+
+### 12.
