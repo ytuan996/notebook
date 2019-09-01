@@ -1,0 +1,204 @@
+### 1. 介绍一下Spring？
+
+Spring是Java分层应用一站式的轻量级开源框架，以IOC和AOP为内核，提供了展现层(Spring MVC)、持久层(Spring JDBC,DAO)和事物管理等一站式的企业级应用技术.
+
+- IOC: (Inverse Of Control) 即控制反转。顾名思义，它包含控制和反转两个概念；"控制"是指调用类选择接口实现类的权利；"反转"则是在代码中移除这种权利交由第三方来决定。
+在Spring中，则是由Spring容器借Bean的配置来控制。Martin Flower 提出的依赖注入(Dependency Injection):调用类对某一接口的实现类的依赖关系交由第三方注入，以
+移除调用类对接口实现类的依赖。
+- AOP: (Aspect Oriented Programing) 即面向切面编程。按照软件重构的思想理念，我们该把多个类中相同的代码抽取到父类，提高代码的重用性。但是对于记录日志和事物管理
+包裹在核心业务周围的代码，按照传统思维我们却无法抽取。AOP的思路就是把这类包裹在核心业务周围的代码抽取为一个独立模块，而业务模块只完成功能，最终再把非业务代码切入到
+核心业务中。感觉就像病毒一样。SpringAOP使用纯Java实现，无需专门的编译和特殊的类加载，而是在运行期间通过动态代理向目标类织入增强代码。
+
+### 2. ICO和AOP的底层实现原理
+
+- IOC Java反射机制
+    
+    1. 我们知道Java语言的运行需要编译为Class文件然后由类加载器装入JVM，在JVM中形成一份描述Class对象的元信息对象。同时Java允许通过程序访问该元信息对象获知Class
+    结构信息，如构造函数，属性，方法等，从而间接控制该Class，这就是Java反射机制。在java.reflect包中，由与反射调用相关的类，这里主要看三个重要的：
+    
+类名 | 描述 |
+- | - |
+Constructor | 类的构造函数反射类，其中一个主要方法是 newInstance(Objects...initargs)创建对象类的实例，相当于new.
+Method | 类方法的反射类，invoke(Object obj, Objects...args)调用对象的方法。
+Field | 类的成员变量反射类。
+    
+    2. 代码实例
+    
+    ```java
+    // 改天再写了
+    
+    ```
+         
+- AOP 动态代理 或者 cglib
+
+    1. 动态代理允许开发者在运行期创建接口的代理实例，是AOP绝好的底层技术。主要涉及两个类：
+    
+类名 | 作用说明 |
+- | - |
+Proxy | 利用 InvocationHandler 动态地创建一个符合某一接口的实例，生成目标类的代理对象
+InvocationHandler | 是一个接口，通过实现该接口定义横切逻辑，并通过反射机制调用目标类的代码，动态地将横切逻辑和业务逻辑编织在一起。
+
+    2. 代码实例
+    
+    (1).创建一个简单的接口
+    
+    ```java
+    public interface HelloWorldInterface {
+        void sayHello(String name);
+    }
+    ```
+    (2).创建接口的实现类
+   
+   ```java
+    public class HelloWorldImpl implements HelloWorldInterface {
+       
+           @Override
+           public void sayHello(String name) {
+               System.out.println("Hello: " + name);
+           }
+       }
+    ```
+    
+    (3).定义拦截器的接口
+    
+    ```java
+    public interface Interceptor {
+    
+        /**
+         * @param proxy  代理对象
+         * @param target 真实对象
+         * @param method 调度方法
+         * @param args   方法运行的参数
+         * @return
+         */
+    
+         boolean before(Object proxy, Object target, Method method, Object args[]);
+    
+         void after(Object proxy, Object target, Method method, Object args[]);
+    
+         void around(Object proxy, Object target, Method method, Object args[]);
+    }
+    ```
+    
+    (4). 定义拦截器的实现类
+    
+    ```java
+    public class InterceptorImpl implements Interceptor {
+        @Override
+        public boolean before(Object proxy, Object target, Method method, Object[] args) {
+            System.err.println("反射方法调用之前的逻辑");
+            return true;
+        }
+    
+        @Override
+        public void after(Object proxy, Object target, Method method, Object[] args) {
+            System.err.println("反射方法后逻辑");
+        }
+    
+        @Override
+        public void around(Object proxy, Object target, Method method, Object[] args) {
+            System.err.println("取代了被代理对象");
+        }
+    }
+    ```
+    
+    (5). 创建横切逻辑实现类
+    
+    ```java
+    public class InterceptorProxy implements InvocationHandler {
+    
+        private Object target = null; // 真实对象
+    
+        private String interceptorClass = null;// 拦截器的全限定类名
+    
+        public InterceptorProxy(Object target, String interceptorClass) {
+            this.target = target;
+            this.interceptorClass = interceptorClass;
+        }
+    
+        public static Object bind(Object target, String interceptorClass) {
+            return Proxy.newProxyInstance(target.getClass().getClassLoader(),
+                    target.getClass().getInterfaces(),
+                    new InterceptorProxy(target, interceptorClass));
+        }
+    
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    
+            if (interceptorClass == null) {
+                // 如何没有设置拦截器
+                return method.invoke(target, args);
+            }
+    
+            Object result = null;
+    
+            Interceptor interceptor = (Interceptor) Class.forName(interceptorClass).newInstance();
+    
+            if (interceptor.before(proxy, target, method, args)) {
+                result = method.invoke(target, args);
+            } else {
+                interceptor.around(proxy, target, method, args);
+            }
+    
+            interceptor.after(proxy, target, method, args);
+    
+            return result;
+        }
+    }
+    ```
+   
+    (6). 动态代理的调用
+    
+    ```java
+    public class JdkProxyExample implements InvocationHandler {
+    
+        private Object instance = null;
+    
+        public Object bind(Object target) {
+            this.instance = target;
+            /**
+             * 1. 类加载器
+             * 2. 需要代理对象的接口
+             * 3. 实现方法逻辑的代理类，必须实现InvocationHandler 的invoke方法
+             */
+            return Proxy.newProxyInstance(instance.getClass().getClassLoader(), instance.getClass().getInterfaces(), this);
+        }
+    
+        /**
+         * @param proxy  代理对象
+         * @param method 当前对象调度的方法
+         * @param args   调度方法的参数
+         * @return
+         * @throws Throwable
+         */
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    
+            System.out.println("调用服务方法之前的逻辑！！");
+            // 相当于调用真实对象的方法，只是通过反射来实现
+            Object invoke = method.invoke(instance, args);
+            return invoke;
+        }
+    
+        public static void main(String[] args) {
+            HelloWorldInterface helloProxy = (HelloWorldInterface) new JdkProxyExample().bind(new HelloWorldImpl());
+    
+            helloProxy.sayHello("name");
+        }
+    }
+    ```
+    
+    (7). 测试
+    
+    ```java
+    public class Main {
+    
+        public static void main(String[] args) {
+    
+            HelloWorldInterface proxy = (HelloWorldInterface) InterceptorProxy.bind(new HelloWorldImpl(), "com.javaee.dynmicProxy.InterceptorImpl");
+    
+            proxy.sayHello("name");
+        }
+    }
+    ```
+    
