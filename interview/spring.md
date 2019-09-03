@@ -41,15 +41,35 @@ InvocationHandler | 是一个接口，通过实现该接口定义横切逻辑，
 
 ### 3. BeanFactory和ApplicationContext有什么区别？
 
+接口| 说明|
+-- | -- |
+BeanFactory | Spring最低层的接口，运行时加载
+ApplicationContext | BeanFactory的派生接口，以及实现其他功能的接口，更强大和易于使用，一次性加载，慢一点，但是提前检查错误。
+
 ### 4. 请解释Spring Bean的生命周期？
 
-### 5. 解释Spring支持的几种bean的作用域。
+### 5. 解释Spring支持的几种bean的作用域类型。
+
+类型 | 说明 |
+-- | -- |
+singleton | 在Spring容器中仅存在一个Bean实例，Bean以单实例的形式存在
+prototype | 每次从容器中调用Bean时，都产生一个新的实例
+request| 每次HTTP请求都创建一个Bean
+session | 同一个Session共享一个Bean，不同的Session是不同的Bean实例
+globalSession | 全局Session共享一个Bean
 
 ### 6. Spring框架中的单例Beans是线程安全的么？
 
+Spring框架并没有对单例bean进行任何多线程的封装处理,但是实际上Spring的Bean并没有可变状态，多都是处理service，dao层，如果存在可变状态的话，
+需要自行解决，最简单的方式就是作用域由“singleton”变更为“prototype”。
+
 ### 7. Spring如何处理线程并发问题？
 
+采用ThreadLocal进行处理，解决线程安全问题。每个线程提供一个本地变量的副本，从而保证安全。以空间换时间。
+
 ### 8. Spring的自动装配：
+
+默认按照类型在容器中查找匹配的Bean，@Autowired注解
 
 ### 9. Spring 框架中都用到了哪些设计模式？
 
