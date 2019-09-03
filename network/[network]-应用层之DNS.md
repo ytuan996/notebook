@@ -11,13 +11,13 @@ DNS系统的设计：其实就是一个联机的分布式数据库系统，采�
 
 ### 互联网的域名结构
 
-![DNS的域名结构]()
+![DNS的域名结构](https://github.com/ytuan996/notebook/blob/master/network/image/dns_structure.png?raw=true)
 
 ### DNS 域名服务器的设计( 划分区)
 
 按照服务器管辖的范围分区
 
-![DNS_server_structure]()
+![DNS_server_structure](https://github.com/ytuan996/notebook/blob/master/network/image/dns_server_structure.png?raw=true)
 
 1.根域名服务器：
 
@@ -29,4 +29,4 @@ DNS系统的设计：其实就是一个联机的分布式数据库系统，采�
 
 ### DNS查询IP的两种方式
 
-![DNS查找IP的两种方式]()
+![DNS查找IP的两种方式](https://github.com/ytuan996/notebook/blob/master/network/image/dns_search_example.png?raw=true)
