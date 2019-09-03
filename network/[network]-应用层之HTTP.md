@@ -8,7 +8,7 @@ URL用来标识互联网上资源的位置和访问这些资源的方法。协�
 
 工作流程：
 
-![http工作流程]()
+![http工作流程](https://github.com/ytuan996/notebook/blob/master/network/image/www_process.png?raw=true)
 
 - 每个万维网站点都有一个服务进程，监听在80端口，随时处理客户端的连接请求，一旦客户端TCP连接上之后，就可以处理
 请求并将结果返回客户端，最后释放TCP连接。
@@ -21,7 +21,7 @@ URL用来标识互联网上资源的位置和访问这些资源的方法。协�
 
 - http发送一个请求的时间大概是RTT * 2
 
-![http 请求时间]()
+![http 请求时间](https://github.com/ytuan996/notebook/blob/master/network/image/http_request_time.png?raw=true)
 
 - 针对http/1.0 无连接的缺点，在http/1.1中使用持续连接解决问题
     1. 非流水线方式：保持TCP连接，收到响应之后再发送下一个请求。比http/1.0节省了一个RTT时间。
@@ -29,7 +29,7 @@ URL用来标识互联网上资源的位置和访问这些资源的方法。协�
     
 #### 代理服务器的工作原理示意图（类似高速缓存）
 
-![代理服务器工作原理]()
+![代理服务器工作原理](https://github.com/ytuan996/notebook/blob/master/network/image/proxy_server.png?raw=true)
 
 ### HTTP的报文结构
 
