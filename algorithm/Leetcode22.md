@@ -29,35 +29,24 @@ class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
         char[] chars = new char[n * 2];
-        combernation(chars, 0, res);
+        combernation(chars, 0, res, 0, 0, n);
         return res;
     }
     
-    private void combernation(char[] chars, int pos, List<String> res) {
+    private void combernation(char[] chars, int pos, List<String> res,int open, int close, int max) {
         if(pos == chars.length) {
-            if(valid(chars)) {
-                res.add(new String(chars));
-                return;
-            }
+            res.add(new String(chars));
+            return;
         }else {
-            chars[pos] = '(';
-            combernation(chars, pos + 1, res);
-            chars[pos] = ')';
-            combernation(chars, pos + 1, res);
-        }
-    }
-    
-    private boolean valid(char[] chars) {
-        int balance = 0;
-        for(char c:chars) {
-            if(c == '(') {
-                balance++;
-            }else {
-                balance--;
-                if(balance < 0) return false;
+            if(open < max) {
+                chars[pos] = '(';
+                combernation(chars, pos + 1, res, open + 1, close, max);
+            }
+            if(close < open) {
+                chars[pos] = ')';
+                combernation(chars, pos + 1, res, open, close + 1, max);
             }
         }
-        return balance == 0;
     }
 }
 ```
