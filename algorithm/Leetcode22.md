@@ -21,6 +21,10 @@
 
 2. 判断括号是否为有效时，使用一个balance标记，'('balance++,'）'balance--, balance != 0则不合法。
 
+3. 回溯方法：combernation(char[] chars, int pos, List<String> res,int open, int close, int max);
+其中：chars暂存已经放入的括号，pos记录当前已经括号的下标，res保存合法的结果，open指'(' 的数量，它应该小于
+max,close表示')'的数量，它应该在任何时候都小于open，max表示括号的最大对数。
+
 参考代码：
 
 ```java
