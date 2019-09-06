@@ -38,7 +38,8 @@
 
 参考代码：
 
-```
+```java
+
 class Solution {
     public String countAndSay(int n) {
         if(n <= 0) 
