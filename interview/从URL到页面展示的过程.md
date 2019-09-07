@@ -7,7 +7,7 @@
 
 互联网设备之间的通信都遵循TCP/IP协议，TCP/IP协议族通信时，会按照分层顺序进行；上到下可分为应用层、传输层、网络层、数据链路层。
 
-![TCP/IP分层]()
+![TCP/IP分层](https://github.com/ytuan996/notebook/blob/master/network/image/TCPIP.png?raw=true)
 
 1.在浏览器地址栏输入url：http://www.baidu.com ，其中http为协议，www.baidu.com是地址，指明了资源所在主机，baidu 是域名，
 也可以是IP地址，但我们为了方便记忆，通常使用域名，然后通过DNS服务将域名解析为IP地址。
