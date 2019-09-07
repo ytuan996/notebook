@@ -68,7 +68,7 @@ HTTPS 采用混合加密的方式：公开密钥加密的效率较低，因此�
  在SSL下的HTTP报文，应用层发送的数据会附加一种叫做MAC的报文摘要，MAC能够直接查知报文是否被篡改，
  从而保证报文的完整性。下图为HTTPS的整个流程。
  
- ![HTTPS的整个流程]()
+ ![HTTPS的整个流程](https://github.com/ytuan996/notebook/blob/master/image/HTTPS%E5%BB%BA%E7%AB%8B%E9%80%9A%E4%BF%A1%E7%9A%84%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B.png?raw=true)
  
  - TSL和SSL
  
