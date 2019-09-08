@@ -86,3 +86,7 @@ public void printMaxNDigit(int n) {
     }
 }
 ```
+
+- 将问题转换为 0～9 的全排列问题， 并使用递归实现
+
+- 如何实现两个任意整数的加法
