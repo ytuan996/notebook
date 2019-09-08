@@ -1,6 +1,18 @@
 ### 反转一个单链表
 
+```
 
+ private ListNode reverse(ListNode head) {
+        ListNode pre = null, next = null, cur = head;
+        while(cur != null) {
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+```
 
 - 扩展(携程2019秋招) 每K个一组反转链表
 
