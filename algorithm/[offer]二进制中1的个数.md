@@ -2,13 +2,13 @@
 
 关于二进制的位运算，总共有五种运算符：或，异或，与，左移，右移。
 
-![]()
+![](https://github.com/ytuan996/notebook/blob/master/image/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6%E8%A7%84%E5%BE%8B.png?raw=true)
 
 左移：其实就是原来的数乘以2
 
 右移：原来的数除以2
 
-![]()
+![](https://github.com/ytuan996/notebook/blob/master/image/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0.png?raw=true)
 
 思路：
 
